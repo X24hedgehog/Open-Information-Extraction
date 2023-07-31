@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ed186d69-6cbd-4d37-aadd-af0a3fde1dba" name="bb8">
+        <fileTransfer accessType="SFTP" host="bb8.lix.polytechnique.fr" port="22" sshConfigId="67990dc7-dc8b-40cd-8dff-5769af9f4169" sshConfig="tnguyen@bb8.lix.polytechnique.fr:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
