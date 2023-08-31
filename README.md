@@ -1,6 +1,6 @@
-# Open Information Extraction from Medical Papers
+# Open Information Extraction With Entity Focused Constraint
 
-Welcome to the **Open Information Extraction (OIE)** project repository. The primary objective of this project is to leverage publicly available medical papers to extract valuable information using Open Information Extraction techniques. By utilizing various scripts and algorithms, this project aims to identify and organize information present within the documents into structured triples.
+Welcome to the **Open Information Extraction (OIE)** project repository. The primary objective of this project is to leverage publicly available medical papers to extract valuable information using Open Information Extraction techniques. By utilizing various scripts and algorithms, this project aims to identify and organize information present within the documents into structured triples of the form (Subject, Predicate, Object).
 
 ## Table of Contents
 
@@ -8,7 +8,7 @@ Welcome to the **Open Information Extraction (OIE)** project repository. The pri
 - [Files](#files)
 - [Usage](#usage)
 - [Clustering Analysis](#clustering-analysis)
-- 
+
 
 ## Introduction
 
