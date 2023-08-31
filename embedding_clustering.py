@@ -15,21 +15,10 @@ sentences = []
 with open("extract_predicate.txt", "r") as file:
     for line in file:
         sentence = line
-        # Remove the \n in every sentences
         sentences.append(sentence)
 
 # Sentences are encoded by calling model.encode()
 sentence_embeddings = model.encode(sentences)
-
-# Print the embeddings
-# for sentence, embedding in zip(sentences, sentence_embeddings):
-#     print("Sentence:", sentence)
-#     print("Embedding:", embedding)
-#     print("")
-
-# for i in range (5):
-#     print(f'Sentence {i+1}: {sentences[i]}')
-#     print(f'Embedding shape: {np.array(sentence_embeddings[i]).shape}')
 
 
 def clustering(model_type, num_cluster):

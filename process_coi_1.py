@@ -34,7 +34,6 @@ def process_sentences(input_file, output_file):
             for line in input_file:
                 for r in replacement:
                     line = line.replace(r, "")
-                # print(f'After: {line}')
                 if line:
                     line = line.strip().capitalize()
                     doc = nlp(line)

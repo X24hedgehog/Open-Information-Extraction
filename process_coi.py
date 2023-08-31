@@ -1,5 +1,5 @@
 import spacy
-import string
+import re
 
 
 def add_space_before_punctuation(input_string):
@@ -10,14 +10,14 @@ def add_space_before_punctuation(input_string):
     else:
         # If the period doesn't exist, add space and a period at the end
         modified_string = input_string + '.'
-    return modified_string
+    modified_sentence = re.sub(r',\s*([A-Z])', r' , \1', modified_string)
+    return modified_sentence
 
 
 def split_sentences_with_pos(doc):
     sentence_beginning_tag = ["NOUN", "PRON", "DET", "PROPN", "INTJ", "ADP", "SCONJ"]
     sentences = []
     current_sentence = ""
-    # print(f'doc:{doc}')
     token_cache = []
     verb_existence = False
     for token in doc:
@@ -36,7 +36,6 @@ def split_sentences_with_pos(doc):
 
     if current_sentence:
         sentences.append(current_sentence.strip())
-    # print(f'sentences: {sentences}')
     return sentences
 
 
@@ -49,27 +48,32 @@ def split_sentences(input_file, output_file):
 
     with open(input_file, 'r', encoding='utf-8') as file:
         for line in file:
+            if line.startswith('https:'):
+                line_content = line.strip().split(" ", 1)
+                link, sentence_content = line_content[0], line_content[1]
+                sentences.append('I use ' + link + '.')
+            else:
+                sentence_content = line
             for r in replacement:
-                line = line.replace(r, "")
-            doc = nlp(line)
+                sentence_content = sentence_content.replace(r, "")
+            doc = nlp(sentence_content)
             collected_sentences = split_sentences_with_pos(doc)
-            # print(f'sentences: {collected_sentences}')
             processed_sentences = [add_space_before_punctuation(sent) for sent in collected_sentences]
             sentences += processed_sentences
 
-    # print(f'Final sentences collected: {sentences}')
 
     with open(output_file, 'w') as out_file:
         for sentence in sentences:
             sentence = sentence.strip()
-            if not sentence[0].isupper():
-                sentence = sentence[0].capitalize() + sentence[1:]
-            if not sentence.endswith("."):
-                sentence = sentence + " ."
+            if not sentence.startswith('I use'):
+                if not sentence[0].isupper():
+                    sentence = sentence[0].capitalize() + sentence[1:]
+                if not sentence.endswith("."):
+                    sentence = sentence + " ."
             out_file.write(sentence + "\n")
 
 
 if __name__ == "__main__":
-    input_file_path = "CoiStatement.txt"  # Replace with the path to your input file
-    output_file_path = "oie_input.txt"  # Replace with the desired output file path
+    input_file_path = "Statement_with_link.txt"  # Replace with the path to your input file
+    output_file_path = "oie_input_3.txt"  # Replace with the desired output file path
     split_sentences(input_file_path, output_file_path)

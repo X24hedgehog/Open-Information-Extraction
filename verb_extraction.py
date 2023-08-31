@@ -6,7 +6,7 @@ nlp = spacy.load('en_core_web_sm')
 
 # Read the text file and extract the predicates
 predicates = []
-with open('extract_predicate.txt', 'r') as file:
+with open('filtered_predicates_updated_2.txt', 'r') as file:
     for line in file:
         line = line.strip()
         if line:
@@ -14,7 +14,7 @@ with open('extract_predicate.txt', 'r') as file:
             predicates.extend(cleaned_line.split('.'))
 
 
-# Function to check if a predicate contains at least one verb and doesn't contain numbers or slashes
+# Function to check if a predicate contains at least one verb or auxiliary
 def is_valid_predicate(predicate):
     predicate = predicate.strip()
     valid = False
@@ -30,8 +30,11 @@ def is_valid_predicate(predicate):
                 found_noun = True
 
     if found_noun:
-        index_of_noun = tokens.index(predicate.split()[-1])  # Find the last noun's index
-        tokens = tokens[:index_of_noun + 1]
+        try:
+            index_of_noun = tokens.index(predicate.split()[-1])  # Find the last noun's index
+            tokens = tokens[:index_of_noun + 1]
+        except:
+            print("An exception occurred")
 
     if valid:
         cleaned_predicate = ' '.join(tokens)
@@ -42,6 +45,6 @@ def is_valid_predicate(predicate):
 filtered_predicates = list(set([is_valid_predicate(predicate) for predicate in predicates if is_valid_predicate(predicate)]))
 
 # Write the filtered predicates to a new file
-with open('filtered_predicates.txt', 'w') as file:
+with open('filtered_predicates_updated_3.txt', 'w') as file:
     for predicate in filtered_predicates:
         file.write(predicate + '\n')
