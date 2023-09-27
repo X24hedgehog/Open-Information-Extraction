@@ -83,8 +83,6 @@ def extract_triples(doc):
 
 test_sentence = "Drs. Doxey, Eberini, Jungo, Kough, Palazzolo, Pereira Mouries and Rodriguez have no conflict of interests to declare ."
 doc = nlp(test_sentence)
-print(f'Predicates: {extract_predicate(doc)}')
-print(f'Noun: {extract_noun(doc)}')
-print(extract_triples(doc))
-
-
+# print(f'Predicates: {extract_predicate(doc)}')
+# print(f'Noun: {extract_noun(doc)}')
+# print(extract_triples(doc))

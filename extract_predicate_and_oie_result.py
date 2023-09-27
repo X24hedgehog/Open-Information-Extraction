@@ -22,27 +22,40 @@ def add_oie_result():
             cleaned_predicate = ' '.join(tokens)
             return cleaned_predicate
 
-    with open('oie_output_v3.txt.oie', 'r') as file:
+    with open('openie_with_entities/v3/oie_output_3.txt', 'r', encoding="utf8") as file:
         lines = file.readlines()
 
     # Initialize a list to store the extracted data
     link = ''
-    cache_triples = set()
+    cache_triples_dict = {}
+    cache_triples = []
     cache = dict()
+    original_sentence = ''
+    original = True
+    count = 0
 
     # print(lines)
     # Iterate through each chunk
     for line in lines:
+        if count % 2000 == 0:
+            print(count)
+        count += 1
         if line.startswith('I use '):
-            cache[link] = cache_triples
-            cache_triples = set()
+            cache[link] = cache_triples_dict
+            cache_triples_dict = dict()
             link = line[6:-1]
         else:
             sentence = line.strip()
-            if sentence and len(sentence) >= 8 and sentence[4] == ":":
+            if sentence and not sentence[0].isnumeric() and original:
+                if cache_triples:
+                    cache_triples_dict[original_sentence] = cache_triples
+                original_sentence = sentence
+                cache_triples = []
+            elif sentence and len(sentence) >= 8 and sentence[4] == ":":
                 l = line.split('; ')
                 if len(l) == 3:
-                    subject, predicate, object = l[0][7:].strip(), l[1].strip(), l[2].strip()
+                    subject, predicate, object = l[0][7:].strip(
+                    ), l[1].strip(), l[2].strip()
                     filtered_predicate = is_valid_predicate(predicate)
                     subject_doc, object_doc = nlp(subject), nlp(object)
                     subject_ent, object_ent = subject_doc.ents, object_doc.ents
@@ -54,35 +67,42 @@ def add_oie_result():
                         for ent in object_doc.ents:
                             obj_entity = ent.text
                             break
-                        new_triple = (sub_entity, filtered_predicate, obj_entity)
+                        new_triple = (
+                            sub_entity, filtered_predicate, obj_entity)
                         # print(f'Triple: {new_triple}')
                         if new_triple not in cache_triples:
-                            cache_triples.add(new_triple)
+                            cache_triples.append(new_triple)
 
+    print('oie dict extracted!!!!!!!!!!!!!!!!!')
+    print('oie dict extracted!!!!!!!!!!!!!!!!!')
+    print('oie dict extracted!!!!!!!!!!!!!!!!!')
+    print('oie dict extracted!!!!!!!!!!!!!!!!!')
+    print('oie dict extracted!!!!!!!!!!!!!!!!!')
+    print('oie dict extracted!!!!!!!!!!!!!!!!!')
     return cache
 
 
 oie_dict = add_oie_result()
-filtered_predicates_updated = []
+# filtered_predicates_updated = []
 
-# Load the JSON file
-with open('triples_with_link_2.json', 'r') as json_file:
-    data = json.load(json_file)
+# # Load the JSON file
+# with open('triples_with_link_2.json', 'r') as json_file:
+#     data = json.load(json_file)
 
-keys = set(oie_dict.keys())
-for entry in data:
-    entry_id = entry["id"]
-    if entry_id in keys:
-        for triple in oie_dict[entry_id]:
-            triple_list = [triple[0], triple[1], triple[2]]
-            if triple_list not in entry['extraction']:
-                entry['extraction'].append(triple_list)
-        for tri in entry['extraction']:
-            filtered_predicates_updated.append(tri[1])
+# keys = set(oie_dict.keys())
+# for entry in data:
+#     entry_id = entry["id"]
+#     if entry_id in keys:
+#         for triple in oie_dict[entry_id]:
+#             triple_list = [triple[0], triple[1], triple[2]]
+#             if triple_list not in entry['extraction']:
+#                 entry['extraction'].append(triple_list)
+#         for tri in entry['extraction']:
+#             filtered_predicates_updated.append(tri[1])
 
-with open('triples_with_link_v3.json', 'w') as updated_json_file:
-    json.dump(data, updated_json_file, indent=4)
+# with open('triples_with_link_v3.json', 'w') as updated_json_file:
+#     json.dump(data, updated_json_file, indent=4)
 
-with open('filtered_predicates_updated.txt', 'w') as file:
-    for predicate in filtered_predicates_updated:
-        file.write(predicate + '\n')
+# # with open('filtered_predicates_updated.txt', 'w') as file:
+# #     for predicate in filtered_predicates_updated:
+# #         file.write(predicate + '\n')

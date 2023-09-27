@@ -1,0 +1,147 @@
+[
+    {
+        "id": "https://pubmed.ncbi.nlm.nih.gov/35219763.",
+        "extraction": {
+            "Dr. Krishan was Im- mediate Past President of the SOT Food Safety Specialty Section (2020\u20132021) at the time of this workshop and represented the SOT Food Safety Specialty Section during the event .": [
+                [
+                    "Krishan",
+                    "represented the",
+                    "SOT Food Safety Specialty Section"
+                ]
+            ],
+            "Dr. Satchell has significant financial interests in Situ Biosciences, a contract research organization that conducts research unrelated to this work .": [
+                [
+                    "Satchell",
+                    "has significant financial",
+                    "Situ Biosciences"
+                ],
+                [
+                    "Dr. Satchell",
+                    "has significant financial interests in ",
+                    "Situ Biosciences"
+                ]
+            ],
+            "Dr. Bauman is an employee of Syngenta Crop Protection LLC, a crop protection company .": [
+                [
+                    "Bauman",
+                    "is an",
+                    "Syngenta"
+                ],
+                [
+                    "Dr. Bauman",
+                    "is an employee of ",
+                    "Syngenta Crop Protection LLC"
+                ]
+            ],
+            "Dr. Islamoviv and Dr. Privalle are employees of BAndre SilvanovichF, a crop protection and chemical company .": [
+                [
+                    "Islamoviv",
+                    "are",
+                    "BAndre"
+                ],
+                [
+                    "Privalle",
+                    "are",
+                    "BAndre"
+                ],
+                [
+                    "Dr. Privalle",
+                    "are employees of ",
+                    "BAndre SilvanovichF"
+                ],
+                [
+                    "Dr. Islamoviv",
+                    "are employees of ",
+                    "BAndre SilvanovichF"
+                ]
+            ],
+            "Mr. Kessenich and Dr. Silvanovich are employees of Bayer CropScience, a crop protection company .": [
+                [
+                    "Kessenich",
+                    "are",
+                    "Bayer CropScience"
+                ],
+                [
+                    "Silvanovich",
+                    "are",
+                    "Bayer CropScience"
+                ]
+            ],
+            "The Food Safety Specialty Section (FS3) of the Society of Toxicology (SOT) collaborated with HESI PATB, helped plan the workshop, provided scientific inputs, speaker recom- mendations, and disseminated the workshop announcement to SOT FS3 membership .": [
+                [
+                    "the Society of Toxicology",
+                    "collaborated with",
+                    "HESI"
+                ],
+                [
+                    "SOT",
+                    "collaborated with ",
+                    "HESI PATB"
+                ],
+                [
+                    "SOT",
+                    "disseminated the workshop announcement to ",
+                    "SOT FS3 membership"
+                ],
+                [
+                    "SOT",
+                    "collaborated with ",
+                    "HESI PATB"
+                ],
+                [
+                    "SOT",
+                    "disseminated the workshop announcement to ",
+                    "SOT FS3 membership"
+                ]
+            ],
+            "Dr. Krishan was Im- mediate Past President of the SOT Food Safety Specialty Section (2020\u00e2\u20ac\u201c2021) at the time of this workshop and represented the SOT Food Safety Specialty Section during the event .": [
+                [
+                    "Dr. Krishan",
+                    "represented ",
+                    "the SOT Food Safety Specialty Section"
+                ]
+            ],
+            "They have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper. 4 Round table discussion: key opportunities, challenges, and proposed solutions to improving the assessment of protein toxicity 5 Key learnings and needs identified Disclaimer Funding COI statement Acknowledgements Appendix A Supplementary data References.": [
+                [
+                    "5 Key learnings",
+                    "identified ",
+                    "Disclaimer Funding COI statement Acknowledgements Appendix A Supplementary data References"
+                ],
+                [
+                    "5 Key needs",
+                    "identified ",
+                    "Disclaimer Funding COI statement Acknowledgements Appendix A Supplementary data References"
+                ]
+            ],
+            "COI statement 4 Round table discussion: key opportunities, challenges, and proposed solutions to improving the assessment of protein toxicity 5 Key learnings and needs identified Disclaimer Funding COI statement Acknowledgements Appendix A Supplementary data References.": [
+                [
+                    "5 Key learnings",
+                    "identified ",
+                    "Disclaimer Funding COI statement Acknowledgements Appendix A Supplementary data References"
+                ],
+                [
+                    "5 Key needs",
+                    "identified ",
+                    "Disclaimer Funding COI statement Acknowledgements Appendix A Supplementary data References"
+                ]
+            ]
+        },
+        "author list": [
+            "Patricia A Bauman",
+            "Andrew C Doxey",
+            "Ivano Eberini",
+            "Emir Islamovic",
+            "Florence Jungo",
+            "Colton Kessenich",
+            "John Kough",
+            "Mansi Krishan",
+            "Luca Palazzolo",
+            "Laura Privalle",
+            "Chester E Rodriguez",
+            "Karla J F Satchell",
+            "Andre Silvanovich",
+            "Lucilia Pereira Mouri\u00e8s"
+        ],
+        "article": "\"From Protein Toxins to Applied Toxicological Testing\" virtual workshop identifies the need for a bioinformatic framework to assess novel food protein safety"
+    }
+]

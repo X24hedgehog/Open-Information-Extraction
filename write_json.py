@@ -3,7 +3,7 @@ import json
 from reverb_algo import extract_triples
 import requests
 from bs4 import BeautifulSoup
-from extract_predicate import oie_dict
+from extract_predicate_and_oie_result import oie_dict
 
 nlp = spacy.load("en_core_web_sm")
 
@@ -61,9 +61,21 @@ def extract_authors_and_title(pubmed_link):
         return None, None
 
 
+def get_author_and_article_from_json():
+    with open('Result/triples_with_link_final_version.json', 'r') as json_file:
+        data = json.load(json_file)
+    article_author_dict = dict()
+    for entry in data:
+        author = entry["author list"]
+        article = entry["article"]
+        link = entry["id"]
+        article_author_dict[link] = [author, article]
+    return article_author_dict
+
+
 def generate_author_replacements(authors, triple):
     phrases_to_replace = ["The author", "The authors",
-                          "the author", "the authors", "The Author", "The Authors"]
+                          "the author", "the authors", "The Author", "The Authors", "We"]
     new_triples = []
     subject, predicate, object_ = triple
     for r in phrases_to_replace:
@@ -84,45 +96,66 @@ def contains_named_entity(noun_phrase):
     return False
 
 
-with open('oie_output_v3.txt.conj', 'r') as file:
+with open('openie_with_entities/v3/oie_output_v3.txt.conj', 'r', encoding="utf8") as file:
     lines = file.readlines()
 
 
 # Initialize a list to store the extracted data
 data_list = []
 link = ''
-triples = []
+triples_dict_dict = dict()
 author_list = []
 article = ''
+original_sentence = ''
+count = 0
+article_author_dict = get_author_and_article_from_json()
 
 # Iterate through each chunk
 for line in lines:
+    if count % 2000 == 0:
+        print(count)
+    count += 1
     if line.startswith('I use '):
+        original = True
         cache_triples = set()
         data = {
             "id": link,
-            "extraction": triples,
+            "extraction": triples_dict_dict,
             "author list": author_list,
             "article": article
         }
         data_list.append(data)
 
         link = line[6:-1]
-        triples = list(oie_dict[link])
-        author_list, article = extract_authors_and_title(link)
+        if link in oie_dict:
+            triples_dict_dict = oie_dict[link]
+        else:
+            triples_dict_dict = dict()
+        if link in article_author_dict.keys():
+            author_list, article = article_author_dict[link]
 
     else:
         sentence = line.strip()
         if sentence:
+            if original:
+                if cache_triples:
+                    if original_sentence not in triples_dict_dict:
+                        triples_dict_dict[original_sentence] = cache_triples
+                    else:
+                        triples_dict_dict[original_sentence] += cache_triples
+                original_sentence = sentence
+                cache_triples = []
+                original = False
             my_triples = extract_triples(nlp(sentence))
             for t in my_triples:
                 for new_triple in generate_author_replacements(author_list, t):
                     if new_triple not in cache_triples and contains_named_entity(new_triple[0]) and contains_named_entity(new_triple[2]):
-                        triples.append(new_triple)
-                        cache_triples.add(new_triple)
+                        cache_triples.append(new_triple)
+        else:
+            original = True
 
 data_list.pop(0)
 
 # Write the extracted data to a JSON file
-with open('triples_with_link_v2.json', 'w') as json_file:
+with open('triples_final_version.json', 'w') as json_file:
     json.dump(data_list, json_file, indent=4)

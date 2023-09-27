@@ -1,8 +1,10 @@
 import xml.etree.ElementTree as ET
 import os
 
-directory = ['data/RTP/XML/clean_split_data_05_11_2022_1993_01_01_2022_12_31', 'data/TAP/XML/clean_split_data_05_11_2022_1993_01_01_2022_12_30']
-key2file = {'CoiStatement': "CoiStatement1.txt", 'Funding': "Funding1.txt", 'Acknowledgement': "Acknowledgement1.txt"}
+directory = ['data/RTP/XML/clean_split_data_05_11_2022_1993_01_01_2022_12_31',
+             'data/TAP/XML/clean_split_data_05_11_2022_1993_01_01_2022_12_30']
+key2file = {'CoiStatement': "CoiStatement1.txt",
+            'Funding': "Funding1.txt", 'Acknowledgement': "Acknowledgement1.txt"}
 
 
 def extract(direct, file):
@@ -24,3 +26,9 @@ for d in directory:
     for f in os.listdir(d):
         extract(d, f)
 
+# with open('openie_with_entities/v3/oie_output_v3.txt.conj', 'r', encoding="utf8") as file:
+#     lines = file.readlines()
+# i = 0
+# for line in lines:
+#     print(i)
+#     i += 1
